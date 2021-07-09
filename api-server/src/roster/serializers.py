@@ -102,3 +102,19 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         user.save()
         return user
+
+
+class MunitionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Munition
+        fields = '__all__'
+
+
+class StoresSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Stores
+        fields = '__all__'
+
+

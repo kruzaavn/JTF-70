@@ -8,6 +8,8 @@ const state = {
   schedule: [],
   qualificationList: [],
   qualificationModuleList: [],
+  storesList: [],
+  munitionList: [],
 }
 
 const mutations = {
@@ -43,6 +45,12 @@ const mutations = {
   setQualificationModules(state, modules) {
     state.qualificationModuleList = modules
   },
+  setMunition(state, munitions) {
+    state.munitionList = munitions
+  },
+  setStores(state, stores) {
+    state.storesList = stores;
+  }
 }
 
 const getters = {
@@ -53,6 +61,28 @@ const getters = {
   schedule: (state) => state.schedule,
   qualifications: (state) => state.qualificationList,
   qualificationModules: (state) => state.qualificationModuleList,
+  munitions: (state) => state.munitionList,
+  stores: (state) => state.storesList,
+  munitionsTable: (state) => {
+
+    let table = state.storesList.reduce((acc, element) => {
+
+      const previous = acc.find(e => e.id === element.id && e.squadron === element.squadron)
+
+      if (previous) {
+
+        previous.count += element.count
+
+      } else {
+        element.name = state.munitionList.find(e => e.id = element.id).name
+        element.squadron_name = state.squadrons.find(e => e.id = element.squadron_name).name
+        acc.push(element)
+      }
+
+    }, [])
+
+    return table
+  }
 }
 
 const actions = {
@@ -99,6 +129,14 @@ const actions = {
     const response = await axios.get('/api/roster/qualifications/modules/list/')
     commit('setQualificationModules', response.data)
   },
+  async getMunitionsList({commit}) {
+    const response = await axios.get('/api/roster/munition/list/')
+    commit('setMunition', response.data)
+  },
+  async getStoresList({commit}) {
+    const response = await axios.get('/api/roster/stores/list/')
+    commit('setStores', response.data)
+  }
 }
 
 export default {

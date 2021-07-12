@@ -12,3 +12,4 @@ daphne
 Pillow
 djangorestframework_simplejwt
 django-storages[azure]
+luadata

@@ -121,3 +121,13 @@ class QualificationCheckoffAdmin(admin.ModelAdmin):
     list_display = ('module', 'aviator', 'date', 'current')
 
     list_filter = ('module__name', 'aviator__callsign')
+
+
+@admin.register(LiveryFile)
+class LiveryFileAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(BaseLivery)
+class BaseLiveryAdmin(admin.ModelAdmin):
+    pass

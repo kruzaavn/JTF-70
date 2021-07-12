@@ -315,3 +315,16 @@ class Event(models.Model):
 
     def __str___(self):
         return f'{self.name}'
+
+
+class LiveryFile(models.Model):
+
+    name = models.CharField(max_length=1024, blank=True, )
+    file = models.ImageField(upload_to='liveries')
+
+
+class BaseLivery(models.Model):
+    name = models.CharField(max_length=1024, blank=True, )
+    airframe = models.ForeignKey(DCSModules, on_delete=models.CASCADE)
+    control = models.JSONField()
+    images = models.ManyToManyField(LiveryFile)

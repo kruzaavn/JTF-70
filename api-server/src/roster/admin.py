@@ -125,7 +125,13 @@ class QualificationCheckoffAdmin(admin.ModelAdmin):
 
 @admin.register(LiveryFile)
 class LiveryFileAdmin(admin.ModelAdmin):
-    pass
+
+    list_display = ('name', 'file', 'file_size')
+
+    @admin.display()
+    def file_size(self, obj):
+
+        return f'{(obj.file.size / 1e6):.2f} MB'
 
 
 @admin.register(BaseLivery)

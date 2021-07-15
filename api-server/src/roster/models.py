@@ -322,6 +322,7 @@ class LiveryFile(models.Model):
     name = models.CharField(max_length=1024)
     file = models.ImageField(upload_to='liveries')
     parameters = models.JSONField(blank=True, null=True)
+    airframe = models.ForeignKey(DCSModules, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.file.name}'
@@ -329,6 +330,6 @@ class LiveryFile(models.Model):
 
 class BaseLivery(models.Model):
     name = models.CharField(max_length=1024)
-    airframe = models.ForeignKey(DCSModules, on_delete=models.CASCADE)
     control = models.JSONField()
     images = models.ManyToManyField(LiveryFile)
+    squadron = models.ForeignKey(Squadron, on_delete=models.CASCADE)
